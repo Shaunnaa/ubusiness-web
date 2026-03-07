@@ -18,11 +18,16 @@ type FormKeys = keyof FormState;
 /* ─────────────────────────────────────────────
    Scroll Reveal Hook & Component
 ───────────────────────────────────────────── */
-function useReveal(threshold = 0.1): [React.RefObject<HTMLDivElement | null>, boolean] {
+function useReveal(threshold = 0.1): [React.RefObject<HTMLDivElement>, boolean] {
+  // 1. Initialize with null as standard
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
+    // 2. Capture ref.current to a local variable for safe cleanup
+    const element = ref.current;
+    if (!element) return;
+
     const obs = new IntersectionObserver(
       ([e]) => { 
         if (e.isIntersecting) { 
@@ -32,11 +37,15 @@ function useReveal(threshold = 0.1): [React.RefObject<HTMLDivElement | null>, bo
       },
       { threshold }
     );
-    if (ref.current) obs.observe(ref.current);
+    
+    obs.observe(element);
+    
     return () => obs.disconnect();
   }, [threshold]);
   
-  return [ref, visible];
+  // 3. Cast the ref to React.RefObject<HTMLDivElement>
+  // This removes the '| null' from the return type to satisfy TypeScript
+  return [ref as React.RefObject<HTMLDivElement>, visible];
 }
 
 interface RevealProps {

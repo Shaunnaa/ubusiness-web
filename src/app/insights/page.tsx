@@ -34,12 +34,12 @@ interface Article {
 ───────────────────────────────────────────── */
 function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.12
-): readonly [React.RefObject<T | null>, boolean] { // 1. Added | null to the return type
+): readonly [React.RefObject<T>, boolean] { // REMOVED | null here to match the cast below
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
-    // 2. Store the current ref value to ensure the same element is observed/unobserved
+    // Capture the current ref value for stable observation
     const element = ref.current;
     if (!element) return;
 
@@ -58,7 +58,8 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
     return () => obs.disconnect();
   }, [threshold]);
   
-  return [ref, visible] as const;
+  // Use 'as' to bridge the gap between initial null state and the return signature
+  return [ref as React.RefObject<T>, visible] as const;
 }
 
 interface RevealProps {

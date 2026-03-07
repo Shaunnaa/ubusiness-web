@@ -7,13 +7,13 @@ import React, { useEffect, useRef, useState } from "react";
 ───────────────────────────────────────────── */
 function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.15
-): readonly [React.RefObject<T | null>, boolean] { // Fix 1: Added | null to the return type
+): readonly [React.RefObject<T>, boolean] {
+  // 1. Initialize with null as usual
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
-    // Fix 2: Capture ref.current in a variable
-    // This ensures the observer targets the same element during cleanup
+    // 2. Capture ref.current safely
     const element = ref.current;
     if (!element) return;
 
@@ -29,11 +29,12 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
     
     obs.observe(element);
     
-    // Clean up the observer if the component unmounts
     return () => obs.disconnect();
   }, [threshold]);
   
-  return [ref, visible] as const;
+  // 3. Cast the ref to satisfy the return type without | null
+  // This tells TypeScript: "Trust me, this is a standard React RefObject"
+  return [ref as React.RefObject<T>, visible] as const;
 }
 
 /* ─────────────────────────────────────────────

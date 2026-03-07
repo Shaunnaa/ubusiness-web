@@ -33,20 +33,21 @@ function useCounter(target: number, duration: number = 2000, start: boolean = fa
 /* ─────────────────────────────────────────────
    Intersection Observer Hook
 ───────────────────────────────────────────── */
-function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement | null>, boolean] {
-  // Add | null here to match the initialization
+function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement>, boolean] {
+  // 1. Standard initialization
   const ref = useRef<HTMLDivElement>(null); 
   const [inView, setInView] = useState(false);
   
   useEffect(() => {
-    const element = ref.current; // Capture the current value
+    // 2. Capture current ref value for stable cleanup
+    const element = ref.current; 
     if (!element) return;
 
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          obs.disconnect();
+          obs.disconnect(); // One-time reveal
         }
       },
       { threshold }
@@ -56,8 +57,8 @@ function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement | n
     return () => obs.disconnect();
   }, [threshold]);
   
-  // Using "as const" is good, but ensure the return type matches
-  return [ref, inView];
+  // 3. Cast the ref to satisfy the return signature (removing | null)
+  return [ref as React.RefObject<HTMLDivElement>, inView];
 }
 
 /* ─────────────────────────────────────────────
@@ -323,7 +324,7 @@ export default function HomePage() {
                 </h2>
               </div>
               <a 
-                href="#insights" 
+                href="/insights" 
                 className="text-brand-gold no-underline text-xs font-bold tracking-[0.2em] uppercase border-b-2 border-brand-gold pb-1 inline-flex items-center gap-1.5"
               >
                 ดูทั้งหมด →
@@ -334,7 +335,7 @@ export default function HomePage() {
               {articles.map((art, i) => (
                 <a 
                   key={i} 
-                  href="#insights" 
+                  href="/insights" 
                   className="group overflow-hidden no-underline flex flex-col transition-all duration-300 bg-white dark:bg-brand-darkElevated shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.14)] dark:hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
                 >
                   <div className="h-[6px] bg-brand-gold transition-all duration-300 group-hover:h-[10px]" />

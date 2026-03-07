@@ -22,15 +22,11 @@ interface FormState {
 ───────────────────────────────────────────── */
 function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.12
-): readonly [React.RefObject<T | null>, boolean] {
-  // 1. Explicitly allow T | null to satisfy the initial 'null' state
-  const ref = useRef<T>(null); 
+): readonly [React.RefObject<T>, boolean] { // Removed | null from here
+  const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
-    // 2. Capture ref.current in a local variable
-    // This is a React best practice to ensure the same element is 
-    // used for both observing and the cleanup disconnect.
     const element = ref.current;
     if (!element) return;
 
@@ -38,7 +34,6 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
       ([e]) => { 
         if (e.isIntersecting) { 
           setVisible(true); 
-          // 3. One-time trigger: disconnect immediately once seen
           obs.disconnect(); 
         } 
       },
@@ -47,11 +42,12 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
     
     obs.observe(element);
     
-    // Cleanup: Ensure the observer is destroyed if the component unmounts
     return () => obs.disconnect();
   }, [threshold]);
   
-  return [ref, visible] as const;
+  // Cast 'ref' to satisfy the strict return type.
+  // This tells TypeScript: "While it starts as null, the consumer treats it as a standard RefObject."
+  return [ref as React.RefObject<T>, visible] as const;
 }
 
 interface RevealProps {
