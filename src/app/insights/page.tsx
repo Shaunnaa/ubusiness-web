@@ -32,34 +32,33 @@ interface Article {
 /* ─────────────────────────────────────────────
    Scroll Reveal Hook
 ───────────────────────────────────────────── */
-function useReveal<T extends HTMLElement = HTMLDivElement>(
+export function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.12
-): readonly [React.RefObject<T>, boolean] { // REMOVED | null here to match the cast below
-  const ref = useRef<T>(null);
+): readonly [React.RefObject<T | null>, boolean] {
+
+  const ref = useRef<T | null>(null);
   const [visible, setVisible] = useState(false);
-  
+
   useEffect(() => {
-    // Capture the current ref value for stable observation
     const element = ref.current;
     if (!element) return;
 
-    const obs = new IntersectionObserver(
-      ([e]) => { 
-        if (e.isIntersecting) { 
-          setVisible(true); 
-          obs.disconnect(); 
-        } 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
       },
       { threshold }
     );
-    
-    obs.observe(element);
-    
-    return () => obs.disconnect();
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
   }, [threshold]);
-  
-  // Use 'as' to bridge the gap between initial null state and the return signature
-  return [ref as React.RefObject<T>, visible] as const;
+
+  return [ref, visible] as const;
 }
 
 interface RevealProps {

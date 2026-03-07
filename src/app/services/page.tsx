@@ -20,34 +20,33 @@ interface FormState {
 /* ─────────────────────────────────────────────
    Scroll Reveal Hook
 ───────────────────────────────────────────── */
-function useReveal<T extends HTMLElement = HTMLDivElement>(
+export function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.12
-): readonly [React.RefObject<T>, boolean] { // Removed | null from here
-  const ref = useRef<T>(null);
+): readonly [React.RefObject<T | null>, boolean] {
+
+  const ref = useRef<T | null>(null);
   const [visible, setVisible] = useState(false);
-  
+
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    const obs = new IntersectionObserver(
-      ([e]) => { 
-        if (e.isIntersecting) { 
-          setVisible(true); 
-          obs.disconnect(); 
-        } 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
       },
       { threshold }
     );
-    
-    obs.observe(element);
-    
-    return () => obs.disconnect();
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
   }, [threshold]);
-  
-  // Cast 'ref' to satisfy the strict return type.
-  // This tells TypeScript: "While it starts as null, the consumer treats it as a standard RefObject."
-  return [ref as React.RefObject<T>, visible] as const;
+
+  return [ref, visible] as const;
 }
 
 interface RevealProps {

@@ -5,36 +5,33 @@ import React, { useEffect, useRef, useState } from "react";
 /* ─────────────────────────────────────────────
    Scroll Reveal Hook
 ───────────────────────────────────────────── */
-function useReveal<T extends HTMLElement = HTMLDivElement>(
+export function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.15
-): readonly [React.RefObject<T>, boolean] {
-  // 1. Initialize with null as usual
-  const ref = useRef<T>(null);
+): readonly [React.RefObject<T | null>, boolean] {
+
+  const ref = useRef<T | null>(null);
   const [visible, setVisible] = useState(false);
-  
+
   useEffect(() => {
-    // 2. Capture ref.current safely
     const element = ref.current;
     if (!element) return;
 
-    const obs = new IntersectionObserver(
-      ([e]) => { 
-        if (e.isIntersecting) { 
-          setVisible(true); 
-          obs.disconnect(); 
-        } 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
       },
       { threshold }
     );
-    
-    obs.observe(element);
-    
-    return () => obs.disconnect();
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
   }, [threshold]);
-  
-  // 3. Cast the ref to satisfy the return type without | null
-  // This tells TypeScript: "Trust me, this is a standard React RefObject"
-  return [ref as React.RefObject<T>, visible] as const;
+
+  return [ref, visible] as const;
 }
 
 /* ─────────────────────────────────────────────

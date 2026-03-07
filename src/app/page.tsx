@@ -33,32 +33,33 @@ function useCounter(target: number, duration: number = 2000, start: boolean = fa
 /* ─────────────────────────────────────────────
    Intersection Observer Hook
 ───────────────────────────────────────────── */
-function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement>, boolean] {
-  // 1. Standard initialization
-  const ref = useRef<HTMLDivElement>(null); 
-  const [inView, setInView] = useState(false);
+export function useInView(
+  threshold: number = 0.3
+): [React.RefObject<HTMLDivElement | null>, boolean] {
   
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
   useEffect(() => {
-    // 2. Capture current ref value for stable cleanup
-    const element = ref.current; 
+    const element = ref.current;
     if (!element) return;
 
-    const obs = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          obs.disconnect(); // One-time reveal
+          observer.disconnect(); // reveal once
         }
       },
       { threshold }
     );
 
-    obs.observe(element);
-    return () => obs.disconnect();
+    observer.observe(element);
+
+    return () => observer.disconnect();
   }, [threshold]);
-  
-  // 3. Cast the ref to satisfy the return signature (removing | null)
-  return [ref as React.RefObject<HTMLDivElement>, inView];
+
+  return [ref, inView];
 }
 
 /* ─────────────────────────────────────────────
@@ -335,7 +336,7 @@ export default function HomePage() {
               {articles.map((art, i) => (
                 <a 
                   key={i} 
-                  href="/insights" 
+                  href="insights" 
                   className="group overflow-hidden no-underline flex flex-col transition-all duration-300 bg-white dark:bg-brand-darkElevated shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.14)] dark:hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
                 >
                   <div className="h-[6px] bg-brand-gold transition-all duration-300 group-hover:h-[10px]" />
