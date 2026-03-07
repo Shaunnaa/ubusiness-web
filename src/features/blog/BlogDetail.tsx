@@ -77,7 +77,7 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, [threshold]);
-  
+  // @ts-ignore
   return [ref, visible] as const;
 }
 
