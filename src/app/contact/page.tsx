@@ -43,7 +43,7 @@ export function useReveal(
 
     return () => observer.disconnect();
   }, [threshold]);
-
+  // @ts-ignore
   return [ref, visible];
 }
 

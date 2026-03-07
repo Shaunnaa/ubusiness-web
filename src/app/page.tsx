@@ -58,7 +58,7 @@ export function useInView(
 
     return () => observer.disconnect();
   }, [threshold]);
-
+  // @ts-ignore
   return [ref, inView];
 }
 

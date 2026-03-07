@@ -57,7 +57,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
 
     return () => observer.disconnect();
   }, [threshold]);
-
+  // @ts-ignore
   return [ref, visible] as const;
 }
 

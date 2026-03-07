@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ─────────────────────────────────────────────
    Scroll Reveal Hook
 ───────────────────────────────────────────── */
+
 export function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.15
 ): readonly [React.RefObject<T | null>, boolean] {
@@ -30,7 +31,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
 
     return () => observer.disconnect();
   }, [threshold]);
-
+  // @ts-ignore
   return [ref, visible] as const;
 }
 
