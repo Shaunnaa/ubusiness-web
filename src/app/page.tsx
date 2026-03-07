@@ -33,11 +33,15 @@ function useCounter(target: number, duration: number = 2000, start: boolean = fa
 /* ─────────────────────────────────────────────
    Intersection Observer Hook
 ───────────────────────────────────────────── */
-function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement>, boolean] {
-  const ref = useRef<HTMLDivElement>(null);
+function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement | null>, boolean] {
+  // Add | null here to match the initialization
+  const ref = useRef<HTMLDivElement>(null); 
   const [inView, setInView] = useState(false);
   
   useEffect(() => {
+    const element = ref.current; // Capture the current value
+    if (!element) return;
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -47,11 +51,13 @@ function useInView(threshold: number = 0.3): [React.RefObject<HTMLDivElement>, b
       },
       { threshold }
     );
-    if (ref.current) obs.observe(ref.current);
+
+    obs.observe(element);
     return () => obs.disconnect();
   }, [threshold]);
   
-  return [ref, inView] as const;
+  // Using "as const" is good, but ensure the return type matches
+  return [ref, inView];
 }
 
 /* ─────────────────────────────────────────────

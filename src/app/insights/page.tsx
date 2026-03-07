@@ -33,12 +33,16 @@ interface Article {
    Scroll Reveal Hook
 ───────────────────────────────────────────── */
 function useReveal<T extends HTMLElement = HTMLDivElement>(
-  threshold: number = 0.1
-): readonly [React.RefObject<T>, boolean] {
+  threshold: number = 0.12
+): readonly [React.RefObject<T | null>, boolean] { // 1. Added | null to the return type
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
+    // 2. Store the current ref value to ensure the same element is observed/unobserved
+    const element = ref.current;
+    if (!element) return;
+
     const obs = new IntersectionObserver(
       ([e]) => { 
         if (e.isIntersecting) { 
@@ -48,7 +52,9 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
       },
       { threshold }
     );
-    if (ref.current) obs.observe(ref.current);
+    
+    obs.observe(element);
+    
     return () => obs.disconnect();
   }, [threshold]);
   

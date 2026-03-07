@@ -7,11 +7,16 @@ import React, { useEffect, useRef, useState } from "react";
 ───────────────────────────────────────────── */
 function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.15
-): readonly [React.RefObject<T>, boolean] {
+): readonly [React.RefObject<T | null>, boolean] { // Fix 1: Added | null to the return type
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
+    // Fix 2: Capture ref.current in a variable
+    // This ensures the observer targets the same element during cleanup
+    const element = ref.current;
+    if (!element) return;
+
     const obs = new IntersectionObserver(
       ([e]) => { 
         if (e.isIntersecting) { 
@@ -21,7 +26,10 @@ function useReveal<T extends HTMLElement = HTMLDivElement>(
       },
       { threshold }
     );
-    if (ref.current) obs.observe(ref.current);
+    
+    obs.observe(element);
+    
+    // Clean up the observer if the component unmounts
     return () => obs.disconnect();
   }, [threshold]);
   

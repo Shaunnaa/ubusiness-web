@@ -22,21 +22,32 @@ interface FormState {
 ───────────────────────────────────────────── */
 function useReveal<T extends HTMLElement = HTMLDivElement>(
   threshold: number = 0.12
-): readonly [React.RefObject<T>, boolean] {
-  const ref = useRef<T>(null);
+): readonly [React.RefObject<T | null>, boolean] {
+  // 1. Explicitly allow T | null to satisfy the initial 'null' state
+  const ref = useRef<T>(null); 
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
+    // 2. Capture ref.current in a local variable
+    // This is a React best practice to ensure the same element is 
+    // used for both observing and the cleanup disconnect.
+    const element = ref.current;
+    if (!element) return;
+
     const obs = new IntersectionObserver(
       ([e]) => { 
         if (e.isIntersecting) { 
           setVisible(true); 
+          // 3. One-time trigger: disconnect immediately once seen
           obs.disconnect(); 
         } 
       },
       { threshold }
     );
-    if (ref.current) obs.observe(ref.current);
+    
+    obs.observe(element);
+    
+    // Cleanup: Ensure the observer is destroyed if the component unmounts
     return () => obs.disconnect();
   }, [threshold]);
   
