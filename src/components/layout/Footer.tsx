@@ -12,7 +12,7 @@ export default function Footer() {
     company: [
       { label: "About Us", href: "/about" },
       { label: "Our Services", href: "/services" },
-      { label: "Insights", href: "/insights" },
+      // { label: "Insights", href: "/insights" },
       { label: "Contact", href: "/contact" },
     ],
     services: [
@@ -27,6 +27,13 @@ export default function Footer() {
     ]
   };
 
+/* ─────────────────────────────────────────────
+   Icons
+───────────────────────────────────────────── */
+const Icons = {
+  Facebook: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>,
+};
+
   return (
     <footer className="bg-white dark:bg-brand-dark border-t border-gray-100 dark:border-gray-800 font-thai transition-colors duration-300">
       <div className="max-w-[1152px] mx-auto px-12 py-12">
@@ -34,14 +41,12 @@ export default function Footer() {
           
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-1">
-            <div className="flex flex-col mb-4">
-              <span className="font-playfair font-extrabold text-[20px] text-brand-greenDark dark:text-white leading-tight">
-                U Business
-              </span>
-              <span className="text-[8px] tracking-[0.2em] uppercase font-bold text-brand-gold">
-                Adviser & Accountancy
-              </span>
-            </div>
+            <a href="/" className="group flex items-center gap-2 no-underline">
+              <img src= "/logo.png"
+                  alt="U Business Adviser & Accountancy Logo" 
+                  className="h-10 md:h-12 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+              />
+            </a>
             <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed max-w-[200px]">
               Strategic Partner for Profitable Growth. ยกระดับธุรกิจของคุณด้วยมาตรฐานระดับสากล
             </p>
@@ -65,7 +70,7 @@ export default function Footer() {
 
           {/* Services Links */}
           <div>
-            <h4 className="font-playfair font-bold text-sm text-brand-greenDark dark:text-gray-100 mb-4 tracking-wide">
+            {/* <h4 className="font-playfair font-bold text-sm text-brand-greenDark dark:text-gray-100 mb-4 tracking-wide">
               Expertise
             </h4>
             <ul className="space-y-2">
@@ -76,7 +81,7 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
 
           {/* Contact / Newsletter Area */}
@@ -85,17 +90,38 @@ export default function Footer() {
               Office
             </h4>
             <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mb-4">
-              Bangkok, Thailand<br />
-              Email: info@aplaccountancy.com<br />
-              Tel: +66 (0) 2 XXX XXXX
+              1006/416 ชั้น 1 มาสเตอร์วิว เอ็กเซ็กคิวทีฟ เพลส, ซอยเจริญนคร 34/1<br />
+              Email: info@ubusinessadviser.com<br />
+              Tel: +66 (0) 2-862-6009
             </p>
             <div className="flex gap-4">
-              {/* Simple Social Placeholder Icons */}
-              <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:border-brand-gold hover:text-brand-gold transition-all cursor-pointer">
-                <span className="text-[10px] font-bold">FB</span>
-              </div>
-              <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:border-brand-gold hover:text-brand-gold transition-all cursor-pointer">
-                <span className="text-[10px] font-bold">LI</span>
+              {/* Social Links */}
+              <div className="flex gap-2.5">
+                {/* Facebook Link */}
+                <a 
+                  href="https://https://www.facebook.com/UBusinessAdviser" // UPDATE THIS LINK
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#1877f2]"
+                  aria-label="Facebook"
+                >
+                  <Icons.Facebook />
+                </a>
+
+                {/* LINE Official Account Link using SVG */}
+                <a 
+                  href="https://line.me/ti/p/@944tkzgr" // UPDATE THIS LINK
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#06c755]"
+                  aria-label="LINE"
+                >
+                  <img 
+                  src="/line-logo.png"
+                  alt="LINE" 
+                  className="w-full h-full object-cover"
+                />
+                </a>
               </div>
             </div>
           </div>

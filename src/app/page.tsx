@@ -148,9 +148,6 @@ export default function HomePage() {
             <h2 className="font-playfair text-2xl font-bold text-brand-greenDark dark:text-white mb-3">
               เว็บไซต์อยู่ระหว่างพัฒนา
             </h2>
-            <h3 className="font-thai text-m font-bold text-brand-greenDark dark:text-white mb-3">
-              (Demo version)
-            </h3>
             <p className="font-thai text-s text-gray-600 dark:text-gray-400  leading-relaxed mb-8">
               ยินดีต้อนรับสู่ APL Accountancy & U Business Adviser <br/>
               พันธมิตรเพื่อการเติบโตอย่างยั่งยืนของคุณ
@@ -223,7 +220,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="absolute bottom-[220px] left-1/2 flex flex-col items-center gap-2 animate-[bounceSlow_2.2s_ease-in-out_infinite]">
+          <div className="absolute bottom-[150px] left-1/2 flex flex-col items-center gap-2 animate-[bounceSlow_2.2s_ease-in-out_infinite]">
             <span className="text-[#6ee7b7] text-[10px] tracking-[0.3em] uppercase">Scroll</span>
             <div className="w-[1px] h-8 bg-brand-gold" />
           </div>
@@ -311,7 +308,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ══════════════ LATEST INSIGHTS ══════════════ */}
+        {/* ══════════════ LATEST INSIGHTS ══════════════
         <section className="py-16 px-12 transition-colors duration-[400ms] bg-[#f8f6f1] dark:bg-brand-dark">
           <div className="max-w-[1152px] mx-auto">
             <div className="flex justify-between items-end mb-14 flex-wrap gap-6">
@@ -357,7 +354,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* ══════════════ FINAL CTA ══════════════ */}
         <section className="py-16 px-12 relative overflow-hidden transition-colors duration-[400ms] bg-brand-green dark:bg-brand-greenDark">

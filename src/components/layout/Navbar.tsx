@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Insights", href: "/insights" },
+  // { label: "Insights", href: "/insights" },
 ];
 
 /* ─────────────────────────────────────────────
@@ -71,22 +71,10 @@ export default function Navbar() {
           
           {/* Brand / Logo */}
           <a href="/" className="group flex items-center gap-2 no-underline">
-            <div className="flex flex-col">
-              <span 
-                className={`font-playfair font-extrabold text-[22px] leading-none transition-colors duration-300 ${
-                  isScrolled ? "text-brand-greenDark dark:text-white" : "text-white"
-                }`}
-              >
-                U Business
-              </span>
-              <span 
-                className={`text-[9px] tracking-[0.25em] uppercase font-bold transition-colors duration-300 ${
-                  isScrolled ? "text-brand-gold" : "text-brand-gold/90"
-                }`}
-              >
-                Adviser & Accountancy
-              </span>
-            </div>
+            <img src= "/logo.png"
+                 alt="U Business Adviser & Accountancy Logo" 
+                 className="h-10 md:h-12 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+            />
           </a>
 
           {/* Desktop Navigation */}

@@ -439,7 +439,9 @@ export default function ServicesPage() {
         ═══════════════════════════════════════ */}
         <section className="py-16 px-12 transition-colors duration-300 bg-white dark:bg-brand-dark">
           <div className="max-w-[900px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
+            {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start"> */}
+            <div className="grid items-center justify-center">
+
 
               {/* Left: Copy */}
               <Reveal>
@@ -490,7 +492,7 @@ export default function ServicesPage() {
                 </div>
               </Reveal>
 
-              {/* Right: Form */}
+              {/* Right: Form
               <Reveal delay={0.15}>
                 <div 
                   className="p-[40px_36px] border border-gray-200 dark:border-gray-800 border-t-[4px] border-t-brand-gold transition-all duration-300 bg-white dark:bg-brand-darkElevated shadow-[0_8px_40px_rgba(0,0,0,0.07)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
@@ -511,7 +513,7 @@ export default function ServicesPage() {
                         ส่งข้อความปรึกษา
                       </h3>
 
-                      {/* Name */}
+                      Name
                       <div className="mb-5">
                         <label className="block text-[12px] font-bold tracking-[0.1em] uppercase text-gray-500 dark:text-gray-400 mb-2 transition-colors duration-300">
                           ชื่อ-นามสกุล *
@@ -525,7 +527,7 @@ export default function ServicesPage() {
                         />
                       </div>
 
-                      {/* Email/Line */}
+                      Email/Line
                       <div className="mb-5">
                         <label className="block text-[12px] font-bold tracking-[0.1em] uppercase text-gray-500 dark:text-gray-400 mb-2 transition-colors duration-300">
                           Email หรือ Line ID *
@@ -539,7 +541,7 @@ export default function ServicesPage() {
                         />
                       </div>
 
-                      {/* Service dropdown */}
+                      Service dropdown
                       <div className="mb-5">
                         <label className="block text-[12px] font-bold tracking-[0.1em] uppercase text-gray-500 dark:text-gray-400 mb-2 transition-colors duration-300">
                           บริการที่สนใจ *
@@ -562,7 +564,7 @@ export default function ServicesPage() {
                         </select>
                       </div>
 
-                      {/* Message */}
+                      Message
                       <div className="mb-7">
                         <label className="block text-[12px] font-bold tracking-[0.1em] uppercase text-gray-500 dark:text-gray-400 mb-2 transition-colors duration-300">
                           ข้อความเพิ่มเติม
@@ -592,7 +594,7 @@ export default function ServicesPage() {
                     </form>
                   )}
                 </div>
-              </Reveal>
+              </Reveal> */}
             </div>
           </div>
         </section>

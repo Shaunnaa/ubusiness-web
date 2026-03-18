@@ -211,11 +211,11 @@ export default function ContactPage() {
           <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-b from-transparent to-white dark:to-brand-dark" />
         </section>
 
-        {/* MAIN CONTENT */}
+        {/* MAIN CONTENT
         <section className="max-w-[1200px] mx-auto px-6 py-[60px] pb-[80px] sm:px-[60px]">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.12fr] gap-12 lg:gap-[72px] items-start">
 
-            {/* LEFT: Info */}
+            LEFT: Info
             <Reveal>
               <div>
                 <div className="flex items-center gap-2.5 mb-3.5">
@@ -268,7 +268,7 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            {/* RIGHT: Form */}
+            RIGHT: Form
             <Reveal delay={0.15}>
               <div className="bg-white dark:bg-brand-darkElevated border border-gray-200 dark:border-gray-800 border-t-[4px] border-t-brand-gold shadow-[0_16px_48px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_72px_rgba(0,0,0,0.55)] p-[44px_40px]">
                 {submitted ? (
@@ -329,6 +329,83 @@ export default function ContactPage() {
               </div>
             </Reveal>
           </div>
+        </section> */}
+
+        {/* MAIN CONTENT */}
+        <section className="max-w-[800px] mx-auto px-6 py-[60px] pb-[80px] sm:px-[60px]">
+          <Reveal>
+            <div>
+              <div className="flex items-center gap-2.5 mb-3.5">
+                <div className="h-[1px] w-9 bg-brand-gold" />
+                <span className="text-brand-gold text-[11px] tracking-[0.3em] uppercase font-bold">Contact Information</span>
+              </div>
+              <h2 className="font-playfair text-[clamp(24px,3vw,36px)] font-bold mb-2.5 leading-[1.25]">
+                เราอยู่ที่นี่<br /><span className="text-brand-gold">พร้อมช่วยเหลือคุณ</span>
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-9 text-[15px] leading-[1.8]">
+                ไม่แน่ใจว่าควรเริ่มจากไหน? บอกเราถึงความต้องการของธุรกิจคุณ ทีมเราจะแนะนำเส้นทางที่เหมาะสมที่สุด
+              </p>
+
+              <div className="flex flex-col gap-2 mb-9">
+                {contactItems.map((item, i) =>
+                  item.href ? (
+                    <a key={i} href={item.href} className="group flex gap-4 py-[18px] px-5 rounded-sm border border-gray-200 dark:border-gray-800 border-l-[3px] border-l-brand-gold bg-gray-50 dark:bg-brand-darkElevated hover:-translate-y-0.5 hover:shadow-md transition-all">
+                      <div className="w-[42px] h-[42px] rounded-full bg-brand-green/5 dark:bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0 transition-colors group-hover:bg-brand-gold group-hover:text-brand-greenDark">
+                        {item.icon}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-gray-500 dark:text-gray-400 text-[10px] font-bold tracking-[0.18em] uppercase mb-0.5">{item.label}</p>
+                        <p className="font-semibold text-[15px] text-gray-900 dark:text-gray-100">{item.value}</p>
+                        {item.sub && <p className="text-brand-gold text-[12px] mt-px">{item.sub}</p>}
+                      </div>
+                    </a>
+                  ) : (
+                    <div key={i} className="flex gap-4 py-[18px] px-5 rounded-sm border border-gray-200 dark:border-gray-800 border-l-[3px] border-l-gray-300 dark:border-l-gray-700 bg-gray-50 dark:bg-brand-darkElevated">
+                      <div className="w-[42px] h-[42px] rounded-full bg-gray-200/50 dark:bg-gray-800/50 flex items-center justify-center text-brand-gold shrink-0">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <p className="text-gray-500 dark:text-gray-400 text-[10px] font-bold tracking-[0.18em] uppercase mb-0.5">{item.label}</p>
+                        <p className="font-semibold text-[15px] text-gray-900 dark:text-gray-100">{item.value}</p>
+                        {item.sub && <p className="text-gray-500 dark:text-gray-400 text-[13px] mt-0.5">{item.sub}</p>}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+
+              <div>
+                <p className="text-gray-500 dark:text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-3.5">ติดตามเรา</p>
+                <div className="flex gap-2.5">
+                  {/* Facebook Link */}
+                  <a 
+                    href="https://https://www.facebook.com/UBusinessAdviser" // UPDATE THIS LINK
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#1877f2]"
+                    aria-label="Facebook"
+                  >
+                    <Icons.Facebook />
+                  </a>
+
+                  {/* LINE Official Account Link using SVG */}
+                  <a 
+                    href="https://line.me/ti/p/@944tkzgr" // UPDATE THIS LINK
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#06c755]"
+                    aria-label="LINE"
+                  >
+                    <img 
+                    src="/line-logo.png"
+                    alt="LINE" 
+                    className="w-full h-full object-cover"
+                  />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </section>
 
         {/* MAP SECTION */}
