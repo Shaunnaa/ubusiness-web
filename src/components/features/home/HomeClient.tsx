@@ -149,7 +149,7 @@ export default function HomePage() {
               เว็บไซต์อยู่ระหว่างพัฒนา
             </h2>
             <p className="font-thai text-s text-gray-600 dark:text-gray-400  leading-relaxed mb-8">
-              ยินดีต้อนรับสู่ APL Accountancy & U Business Adviser <br/>
+              ยินดีต้อนรับสู่ U Business Adviser & APL Accountancy <br/>
               พันธมิตรเพื่อการเติบโตอย่างยั่งยืนของคุณ
             </p>
             
@@ -186,7 +186,7 @@ export default function HomePage() {
             <div className="flex items-center gap-3 mb-6">
               <div className="h-[1px] w-12 bg-brand-gold" />
               <span className="text-brand-gold text-[11px] tracking-[0.3em] uppercase font-semibold">
-                APL Accountancy · U Business Adviser
+                U Business Adviser · APL Accountancy
               </span>
             </div>
 
@@ -197,7 +197,7 @@ export default function HomePage() {
 
             <p className="text-[#d1fae5] text-lg leading-[1.85] max-w-[580px] font-light mb-10">
               ด้วยประสบการณ์กว่า <strong className="text-white font-semibold">30 ปี</strong>{" "}
-              ของ APL Accountancy และ U Business Adviser เราคือพันธมิตรที่ไว้วางใจได้
+              ของ  U Business Adviser และ APL Accountancy เราคือพันธมิตรที่ไว้วางใจได้
               ในการยกระดับธุรกิจของคุณด้วยมาตรฐานบริษัทมหาชน
             </p>
 

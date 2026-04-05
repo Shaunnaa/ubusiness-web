@@ -167,7 +167,7 @@ export default function Navbar() {
             Contact Us
           </a>
           <p className="text-center text-[11px] text-gray-400 mt-4">
-            APL Accountancy · U Business Adviser
+            U Business Adviser · APL Accountancy
           </p>
         </div>
       </div>

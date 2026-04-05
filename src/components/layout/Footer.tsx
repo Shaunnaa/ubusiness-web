@@ -130,7 +130,7 @@ const Icons = {
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-gray-50 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-            © {currentYear} APL Accountancy & U Business Adviser. All Rights Reserved.
+            © {currentYear} U Business Adviser & APL Accountancy. All Rights Reserved.
           </p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (

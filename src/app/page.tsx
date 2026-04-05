@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 import HomeClient from "../components/features/home/HomeClient"; 
 
 export const metadata: Metadata = {
-  title: "APL Accountancy & U Business Adviser | ที่ปรึกษาธุรกิจและบัญชี",
+  title: "U Business Adviser & APL Accountancy | ที่ปรึกษาธุรกิจและบัญชี",
   description: "พันธมิตรเชิงกลยุทธ์เพื่อการเติบโตอย่างยั่งยืน บริการวางแผนกลยุทธ์การค้า ตรวจสอบภายใน และบัญชีภาษี ด้วยประสบการณ์กว่า 30 ปี มาตรฐานบริษัทมหาชน",
-  keywords: "ที่ปรึกษาธุรกิจ, Modern Trade, Traditional Trade, วางแผนภาษี, ตรวจสอบภายใน, กลยุทธ์การค้า, รับทำบัญชี, SME, U Business Adviser, APL Accountancy",
+  keywords: "ที่ปรึกษาธุรกิจ, Modern Trade, Traditional Trade, วางแผนภาษี, ตรวจสอบภายใน, กลยุทธ์การค้า, รับทำบัญชี, SME, U Business Adviser, APL Accountancy, ubusinessadviser, ubusinessadvisor",
   openGraph: {
-    title: "APL Accountancy & U Business Adviser | ที่ปรึกษาธุรกิจ",
+    title: "U Business Adviser & APL Accountancy | ที่ปรึกษาธุรกิจ",
     description: "ยกระดับธุรกิจของคุณด้วยมาตรฐานระดับสากล ปรึกษาฟรี",
     url: "https://www.ubusinessadviser.com",
     siteName: "U Business Adviser",

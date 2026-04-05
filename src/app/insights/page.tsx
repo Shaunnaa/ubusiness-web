@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import InsightsClient from "../../components/features/insights/InsightsClient";
 
 export const metadata: Metadata = {
-  title: "บทความและแนวคิดธุรกิจ | APL Accountancy & U Business Adviser",
+  title: "บทความและแนวคิดธุรกิจ | U Business Adviser & APL Accountancy",
   description: "อัปเดตบทวิเคราะห์และกลยุทธ์ทางธุรกิจจากประสบการณ์กว่า 30 ปี อ่านเคล็ดลับการเพิ่มกำไร วางแผนภาษี และระบบควบคุมภายใน สำหรับผู้ประกอบการ SME",
   keywords: "บทความธุรกิจ, ความรู้ SME, ข่าวธุรกิจ, วางแผนภาษี, กลยุทธ์การค้า, Internal Audit, U Business Adviser",
   openGraph: {

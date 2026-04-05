@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import ServicesClient from "../../components/features/services/ServicesClient";
 
 export const metadata: Metadata = {
-  title: "บริการของเรา | APL Accountancy & U Business Adviser",
+  title: "บริการของเรา | U Business Adviser & APL Accountancy",
   description: "บริการที่ปรึกษาธุรกิจครบวงจร 3 เสาหลัก: กลยุทธ์การค้าและการจัดจำหน่าย, บัญชีและวางแผนภาษีระดับ TFRS, และระบบตรวจสอบภายใน (Internal Audit) มาตรฐานบริษัทมหาชน",
   keywords: "ที่ปรึกษาธุรกิจ, กลยุทธ์การขาย, รับทำบัญชี, วางแผนภาษี, ตรวจสอบภายใน, Modern Trade, Traditional Trade, Internal Audit, CFO อาชีพ, เตรียมตัว IPO, U Business Adviser, APL Accountancy",
   openGraph: {

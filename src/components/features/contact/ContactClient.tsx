@@ -379,7 +379,7 @@ export default function ContactPage() {
                 <div className="flex gap-2.5">
                   {/* Facebook Link */}
                   <a 
-                    href="https://https://www.facebook.com/UBusinessAdviser" // UPDATE THIS LINK
+                    href="=https://www.facebook.com/UBusinessAdviser"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#1877f2]"
@@ -390,7 +390,7 @@ export default function ContactPage() {
 
                   {/* LINE Official Account Link using SVG */}
                   <a 
-                    href="https://line.me/ti/p/@944tkzgr" // UPDATE THIS LINK
+                    href="https://line.me/ti/p/@944tkzgr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#06c755]"
@@ -414,7 +414,7 @@ export default function ContactPage() {
             <div className="relative">
               <div className="absolute top-4 left-4 sm:top-6 sm:left-12 z-20 bg-white/95 dark:bg-brand-dark/95 border border-gray-200 dark:border-gray-800 border-l-[4px] border-l-brand-gold p-[18px_22px] shadow-xl backdrop-blur-[12px] max-w-[300px]">
                 <p className="text-brand-gold text-[10px] font-extrabold tracking-[0.25em] uppercase mb-2 flex items-center gap-[5px]"><Icons.MapPin /> สำนักงาน</p>
-                <p className="font-bold text-[14px] leading-[1.4] mb-1.5">APL Accountancy /<br />U Business Adviser</p>
+                <p className="font-bold text-[14px] leading-[1.4] mb-1.5">U Business Adviser /<br />APL Accountancy</p>
                 <p className="text-gray-600 dark:text-gray-400 text-[12.5px] leading-[1.6] mb-2.5">1006/416 ชั้น 1 มาสเตอร์วิว เอ็กเซ็กคิวทีฟ เพลส, ซอยเจริญนคร 34/1</p>
                 <div className="flex items-center gap-1.5"><div className="w-[7px] h-[7px] rounded-full bg-brand-green dark:bg-emerald-400" />
                 <span className="text-brand-green dark:text-emerald-400 text-xs font-semibold">เปิดทำการ จ–ศ 08:30–17:30</span></div>
