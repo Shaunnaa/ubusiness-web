@@ -197,7 +197,7 @@ export default function HomePage() {
 
             <p className="text-[#d1fae5] text-lg leading-[1.85] max-w-[580px] font-light mb-10">
               ด้วยประสบการณ์กว่า <strong className="text-white font-semibold">30 ปี</strong>{" "}
-              ของ  U Business Adviser และ APL Accountancy เราคือพันธมิตรที่ไว้วางใจได้
+              ของ U Business Adviser และ APL Accountancy เราคือพันธมิตรที่ไว้วางใจได้
               ในการยกระดับธุรกิจของคุณด้วยมาตรฐานบริษัทมหาชน
             </p>
 
