@@ -41,7 +41,7 @@ export async function submitContactForm(formData: {
     // Send email to the inbox
     // ==========================================
     const transporter = nodemailer.createTransport({
-      host: "mail.ubusinessadviser.com",
+      host: process.env.SMTP_HOST,
       port: 465,
       secure: true, 
       auth: {
@@ -81,6 +81,6 @@ export async function submitContactForm(formData: {
 
   } catch (error) {
     console.error("System Error:", error);
-    return { success: false, error: "เกิดข้อผิดพลาดในการบันทึกข้อมูล" };
+    return { success: false, error: "เกิดข้อผิดพลาด โปรดติดต่อผ่าน Facebook หรือ Line" };
   }
 }
