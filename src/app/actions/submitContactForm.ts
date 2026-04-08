@@ -6,7 +6,7 @@ import mysql from "mysql2/promise";
 export async function submitContactForm(formData: {
   name: string;
   company?: string;
-  contact: string;
+  phone: string;
   subject: string;
   message: string;
 }) {
@@ -22,13 +22,13 @@ export async function submitContactForm(formData: {
     });
 
     const dbQuery = `
-      INSERT INTO contacts (name, company, contact_info, subject, message)
+      INSERT INTO contacts (name, company, phone, subject, message)
       VALUES (?, ?, ?, ?, ?)
     `;
     const dbValues = [
       formData.name, 
       formData.company || "-", 
-      formData.contact, 
+      formData.phone, 
       formData.subject, 
       formData.message
     ];
@@ -53,7 +53,7 @@ export async function submitContactForm(formData: {
     const mailOptions = {
       from: `"Website System" <${process.env.SMTP_EMAIL}>`,
       to: process.env.CONTACT_EMAIL,
-      replyTo: formData.contact.includes("@") ? formData.contact : undefined,
+      replyTo: formData.phone.includes("@") ? formData.phone : undefined,
       subject: `[ลูกค้าใหม่] ${formData.subject} - คุณ ${formData.name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
@@ -64,7 +64,7 @@ export async function submitContactForm(formData: {
             <p style="color: green; font-size: 12px;">✅ บันทึกข้อมูลลง Database สำเร็จแล้ว</p>
             <p><strong>ชื่อ:</strong> ${formData.name}</p>
             <p><strong>บริษัท:</strong> ${formData.company || '-'}</p>
-            <p><strong>ติดต่อ:</strong> ${formData.contact}</p>
+            <p><strong>ติดต่อ:</strong> ${formData.phone}</p>
             <p><strong>เรื่อง:</strong> ${formData.subject}</p>
             <hr style="border-top: 1px solid #eee; margin: 15px 0;" />
             <p><strong>ข้อความ:</strong></p>

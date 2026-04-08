@@ -174,7 +174,7 @@ export default function ContactPage() {
       const result = await submitContactForm({
         name: form.name,
         company: form.company,
-        contact: form.phone,
+        phone: form.phone,
         subject: form.subject,
         message: form.message
       });
