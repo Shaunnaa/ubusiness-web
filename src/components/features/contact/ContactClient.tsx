@@ -9,8 +9,9 @@ import { submitContactForm } from "../../../app/actions/submitContactForm";
 interface FormState {
   name: string;
   company: string;
-  subject: string;
+  email: string;
   phone: string;
+  subject: string;
   message: string;
 }
 
@@ -94,19 +95,21 @@ const Icons = {
    Validation helpers
 ───────────────────────────────────────────── */
 const validate: Record<FormKeys, (v: string) => boolean> = {
-  phone:   (v) => /^[0-9]{9,10}$/.test(v.replace(/[-\s]/g, "")),
   name:    (v) => v.trim().length >= 2,
   company: (v) => true, // (Optional)
+  email:   (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+  phone:   (v) => /^[0-9]{9,10}$/.test(v.replace(/[-\s]/g, "")),
   subject: (v) => v !== "",
-  message: (v) => v.trim().length >= 10,
+  message: (v) => v.trim().length >= 1,
 };
 
 const errorMsg: Record<FormKeys, string> = {
-  phone:   "กรุณากรอกเบอร์โทร 9-10 หลัก",
   name:    "กรุณากรอกชื่อ-นามสกุล",
   company: "กรุณากรอกชื่อบริษัท", // (Optional)
+  email:   "กรุณากรอกอีเมล",
+  phone:   "กรุณากรอกเบอร์โทร 10 หลัก",
   subject: "กรุณาเลือกหัวข้อที่ต้องการ",
-  message: "กรุณาระบุรายละเอียด (อย่างน้อย 10 ตัวอักษร)",
+  message: "กรุณาระบุรายละเอียด หากไม่มีใส่ -",
 };
 
 /* ─────────────────────────────────────────────
@@ -135,7 +138,7 @@ function FormField({ label, children, error, hint }: { label: string; children: 
    CONTACT PAGE
 ───────────────────────────────────────────── */
 export default function ContactPage() {
-  const [form, setForm] = useState<FormState>({ name: "", company: "", subject: "", phone: "", message: "" });
+  const [form, setForm] = useState<FormState>({ name: "", company: "", email: "", phone: "", subject: "",  message: "" });
   const [touched, setTouched] = useState<Partial<Record<FormKeys, boolean>>>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -164,7 +167,7 @@ export default function ContactPage() {
   // ==========================================
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTouched({ name: true, company: true, subject: true, phone: true, message: true });
+    setTouched({ name: true, company: true, email: true, phone: true, subject: true,  message: true });
     
     if (!allValid) return;
     setLoading(true);
@@ -174,6 +177,7 @@ export default function ContactPage() {
       const result = await submitContactForm({
         name: form.name,
         company: form.company,
+        email: form.email,
         phone: form.phone,
         subject: form.subject,
         message: form.message
@@ -343,7 +347,7 @@ export default function ContactPage() {
                     </div>
                     <h3 className="font-playfair text-[26px] font-bold mb-3.5">ขอบคุณที่ติดต่อเรา!</h3>
                     <p className="text-gray-600 dark:text-gray-400 text-[16px] mb-2">ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว ทีมงานจะติดต่อกลับ <strong className="text-brand-gold">ภายใน 24 ชั่วโมง</strong></p>
-                    <button onClick={() => { setSubmitted(false); setForm({ name: "", company: "", subject: "", phone: "", message: "" }); setTouched({}); }} className="mt-8 bg-transparent border border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 py-2.5 px-6 rounded-sm hover:border-brand-gold hover:text-brand-gold transition-all">ส่งข้อความอีกครั้ง</button>
+                    <button onClick={() => { setSubmitted(false); setForm({ name: "", company: "", email: "", phone: "",subject: "", message: "" }); setTouched({}); }} className="mt-8 bg-transparent border border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 py-2.5 px-6 rounded-sm hover:border-brand-gold hover:text-brand-gold transition-all">ส่งข้อความอีกครั้ง</button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
@@ -353,15 +357,19 @@ export default function ContactPage() {
                     </div>
 
                     <FormField label="ชื่อ-นามสกุล *" error={showError("name") ? errorMsg.name : null}>
-                      <input type="text" placeholder="คำนำหน้า ชื่อ นามสกุล" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} onBlur={() => setTouched(p => ({ ...p, name: true }))} className={`${inputBaseClasses} ${showError("name") ? "!border-red-600" : ""}`} />
+                      <input type="text" placeholder="ชื่อ นามสกุล" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} onBlur={() => setTouched(p => ({ ...p, name: true }))} className={`${inputBaseClasses} ${showError("name") ? "!border-red-600" : ""}`} />
                     </FormField>
 
                     <FormField label="บริษัท / ชื่อธุรกิจ (ถ้ามี)" error={null}>
                       <input type="text" placeholder="บริษัท ตัวอย่าง จำกัด" value={form.company} onChange={e => setForm({ ...form, company: e.target.value })} onBlur={() => setTouched(p => ({ ...p, company: true }))} className={inputBaseClasses} />
                     </FormField>
 
+                    <FormField label="อีเมล *" error={showError("email") ? errorMsg.email : null}>
+                      <input type="email" placeholder="example@mail.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} onBlur={() => setTouched(p => ({ ...p, email: true }))} className={inputBaseClasses} />
+                    </FormField>
+
                     {/* ช่องกรอกเบอร์โทรที่ดัดแปลงให้รองรับการใส่ขีดอัตโนมัติ */}
-                    <FormField label="เบอร์โทรศัพท์ *" error={showError("phone") ? errorMsg.phone : null} hint={touched.phone && validate.phone(form.phone) ? "✓ เบอร์โทรถูกต้อง" : null}>
+                    <FormField label="เบอร์โทรศัพท์ (ใส่เลขเท่านั้น) *" error={showError("phone") ? errorMsg.phone : null} hint={touched.phone && validate.phone(form.phone) ? "✓ เบอร์โทรถูกต้อง" : null}>
                       <input 
                         type="tel" 
                         placeholder="0XX-XXX-XXXX" 
