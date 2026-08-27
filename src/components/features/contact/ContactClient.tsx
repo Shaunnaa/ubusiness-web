@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { submitContactForm } from "../../../app/actions/submitContactForm";
+import { companyprofile } from "../../../data/companyprofile";
 
 /* ─────────────────────────────────────────────
    Types
@@ -196,11 +197,11 @@ export default function ContactPage() {
   };
 
   const contactItems = [
-    { icon: <Icons.Phone />,    label: "โทรศัพท์",      value: "02-862-6009",            sub: "คลิกเพื่อโทร",          href: "tel:02XXXXXXX" },
-    { icon: <Icons.Mail />,     label: "อีเมล",          value: "info@ubusinessadviser.com",   sub: "คลิกเพื่อส่งอีเมล",    href: "mailto:info@ubusiness.co.th" },
-    { icon: <Icons.Line />,     label: "LINE OA",        value: "@944tkzgr",      sub: "เพิ่มเพื่อนบน LINE",     href: "https://line.me" },
-    { icon: <Icons.Location />, label: "ที่อยู่สำนักงาน", value: "1006/416 ชั้น 1 มาสเตอร์วิว เอ็กเซ็กคิวทีฟ เพลส, ซอยเจริญนคร 34/1", sub: "ถ.เจริญนคร แขวงบางลำภูล่าง เขตคลองสาน กรุงเทพฯ 10600" },
-    { icon: <Icons.Clock />,    label: "เวลาทำการ",      value: "จันทร์ – เสาร์",         sub: "08:30 – 17:30 น. (ยกเว้นวันหยุดนักขัตฤกษ์)" },
+    { icon: <Icons.Phone />,    label: "โทรศัพท์",      value: companyprofile.phone,            sub: "คลิกเพื่อโทร",          href: "tel:${companyprofile.phone}" },
+    { icon: <Icons.Mail />,     label: "อีเมล",          value: companyprofile.email,   sub: "คลิกเพื่อส่งอีเมล",    href: "mailto:${companyprofile.email}" },
+    { icon: <Icons.Line />,     label: "LINE OA",        value: `@${companyprofile.line.split("@").pop()}`,      sub: "เพิ่มเพื่อนบน LINE",     href: companyprofile.line },
+    { icon: <Icons.Location />, label: "ที่อยู่สำนักงาน", value: companyprofile.address1, sub: companyprofile.address2 },
+    { icon: <Icons.Clock />,    label: "เวลาทำการ",      value: companyprofile.opendate,         sub: companyprofile.opentime },
   ];
 
   const inputBaseClasses = `w-full p-[15px_18px] text-[15px] font-thai bg-gray-50 dark:bg-[#111] text-gray-900 dark:text-gray-100 outline-none rounded-sm min-h-[52px] transition-all duration-[0.25s] border-[1.5px] border-gray-200 dark:border-gray-800 focus:border-brand-gold focus:ring-[3px] focus:ring-brand-gold/20 dark:focus:ring-brand-gold/10`;
@@ -307,7 +308,7 @@ export default function ContactPage() {
                 <div className="flex gap-2.5">
                   {/* Facebook Link */}
                   <a 
-                    href="https://www.facebook.com/UBusinessAdviser"
+                    href={companyprofile.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#1877f2]"
@@ -318,7 +319,7 @@ export default function ContactPage() {
 
                   {/* LINE Official Account Link using SVG */}
                   <a 
-                    href="https://line.me/ti/p/@944tkzgr"
+                    href={companyprofile.line}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#06c755]"
@@ -417,10 +418,10 @@ export default function ContactPage() {
             <div className="relative">
               <div className="absolute top-4 left-4 sm:top-6 sm:left-12 z-20 bg-white/95 dark:bg-brand-dark/95 border border-gray-200 dark:border-gray-800 border-l-[4px] border-l-brand-gold p-[18px_22px] shadow-xl backdrop-blur-[12px] max-w-[300px]">
                 <p className="text-brand-gold text-[10px] font-extrabold tracking-[0.25em] uppercase mb-2 flex items-center gap-[5px]"><Icons.MapPin /> สำนักงาน</p>
-                <p className="font-bold text-[14px] leading-[1.4] mb-1.5">U Business Adviser /<br />APL Accountancy</p>
-                <p className="text-gray-600 dark:text-gray-400 text-[12.5px] leading-[1.6] mb-2.5">1006/416 ชั้น 1 มาสเตอร์วิว เอ็กเซ็กคิวทีฟ เพลส, ซอยเจริญนคร 34/1</p>
+                <p className="font-bold text-[14px] leading-[1.4] mb-1.5">{companyprofile.name.split(" / ")[0]} /<br />{companyprofile.name.split(" / ")[1]}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-[12.5px] leading-[1.6] mb-2.5">{companyprofile.address1} {companyprofile.address2}</p>
                 <div className="flex items-center gap-1.5"><div className="w-[7px] h-[7px] rounded-full bg-brand-green dark:bg-emerald-400" />
-                <span className="text-brand-green dark:text-emerald-400 text-xs font-semibold">เปิดทำการ จ–ศ 08:30–17:30</span></div>
+                <span className="text-brand-green dark:text-emerald-400 text-xs font-semibold">เปิดทำการ {companyprofile.opendates} {companyprofile.opentime.split(" น.")[0]}</span></div>
               </div>
 
               <div className="h-[480px] overflow-hidden dark:invert-[92%] dark:sepia-0 dark:saturate-[0.85] dark:hue-rotate-[180deg] dark:brightness-[0.82] dark:contrast-90">
@@ -430,7 +431,7 @@ export default function ContactPage() {
               <div className="absolute bottom-0 left-0 right-0 p-[108px_56px_36px] flex flex-wrap justify-between items-end gap-6 bg-gradient-to-t from-brand-greenDark from-0% via-brand-greenDark via-[95%] to-transparent to-100% dark:from-brand-dark/95 via-transparent to-transparent transition-colors">
                 <div>
                   <p className="text-white/80 text-[13px] tracking-[0.15em] uppercase mb-1.5">หรือนัดพบที่สำนักงาน</p>
-                  <p className="text-white font-semibold text-[16px]">เปิดทำการ จันทร์–เสาร์ 08:30–17:30 น. <span className="text-brand-gold ml-2">•</span><span className="text-white/70 text-[14px] ml-2">กรุณานัดหมายล่วงหน้า</span></p>
+                  <p className="text-white font-semibold text-[16px]">เปิดทำการ {companyprofile.opendate} {companyprofile.opentime}<span className="text-brand-gold ml-2">•</span><span className="text-white/70 text-[14px] ml-2">กรุณานัดหมายล่วงหน้า</span></p>
                 </div>
                 <a href="https://maps.app.goo.gl/QECVACv2MrPgS9PM7" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 p-[13px_30px] bg-brand-gold text-brand-greenDark font-extrabold text-[12px] tracking-[0.18em] uppercase transition-all hover:bg-brand-goldLight hover:gap-3.5">
                   <Icons.MapPin /> เปิดใน Google Maps

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: "th_TH",
     type: "website",
   },
-};
+};`1`
 
 export default function HomePage() {
   return <HomeClient />;

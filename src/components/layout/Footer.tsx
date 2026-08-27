@@ -1,6 +1,8 @@
 "use client"
 
 import React from "react";
+import { companyprofile } from "../../data/companyprofile";
+
 
 /* ─────────────────────────────────────────────
    Footer Component
@@ -90,16 +92,16 @@ const Icons = {
               Office
             </h4>
             <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mb-4">
-              1006/416 ชั้น 1 มาสเตอร์วิว เอ็กเซ็กคิวทีฟ เพลส, ซอยเจริญนคร 34/1<br />
-              Email: info@ubusinessadviser.com<br />
-              Tel: +66 (0) 2-862-6009
+              {companyprofile.address1}<br />
+              Email: {companyprofile.email}<br />
+              Tel: +66 (0) {companyprofile.phone.slice(1)}
             </p>
             <div className="flex gap-4">
               {/* Social Links */}
               <div className="flex gap-2.5">
                 {/* Facebook Link */}
                 <a 
-                  href="https://https://www.facebook.com/UBusinessAdviser" // UPDATE THIS LINK
+                  href={companyprofile.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#1877f2]"
@@ -110,7 +112,7 @@ const Icons = {
 
                 {/* LINE Official Account Link using SVG */}
                 <a 
-                  href="https://line.me/ti/p/@944tkzgr" // UPDATE THIS LINK
+                  href={companyprofile.line}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-[3px] hover:shadow-lg bg-[#06c755]"
