@@ -197,8 +197,8 @@ export default function ContactPage() {
   };
 
   const contactItems = [
-    { icon: <Icons.Phone />,    label: "โทรศัพท์",      value: companyprofile.phone,            sub: "คลิกเพื่อโทร",          href: "tel:${companyprofile.phone}" },
-    { icon: <Icons.Mail />,     label: "อีเมล",          value: companyprofile.email,   sub: "คลิกเพื่อส่งอีเมล",    href: "mailto:${companyprofile.email}" },
+    { icon: <Icons.Phone />,    label: "โทรศัพท์",      value: companyprofile.phone,            sub: "คลิกเพื่อโทร",          href: `tel:${companyprofile.phone}` },
+    { icon: <Icons.Mail />,     label: "อีเมล",          value: companyprofile.email,   sub: "คลิกเพื่อส่งอีเมล",    href: `mailto:${companyprofile.email}` },
     { icon: <Icons.Line />,     label: "LINE OA",        value: `@${companyprofile.line.split("@").pop()}`,      sub: "เพิ่มเพื่อนบน LINE",     href: companyprofile.line },
     { icon: <Icons.Location />, label: "ที่อยู่สำนักงาน", value: companyprofile.address1, sub: companyprofile.address2 },
     { icon: <Icons.Clock />,    label: "เวลาทำการ",      value: companyprofile.opendate,         sub: companyprofile.opentime },
